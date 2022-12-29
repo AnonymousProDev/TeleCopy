@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block body %}
+
+<div class="container pt-24 md:pt-20 mx-auto flex flex-wrap flex-col md:flex-row items-center">
+    <div class="flex flex-col w-full xl:w-2/5 justify-center lg:items-start overflow-y-hidden">
+      <h1 class="my-4 text-3xl md:text-5xl text-white opacity-75 font-bold leading-tight text-center md:text-left">
+        Sending to
+        <span class="bg-clip-text text-transparent bg-gradient-to-r from-green-400 via-pink-500 to-purple-500">
+          @{{tguser.user}}
+        </span>
+      </h1>
+      <p class="leading-normal text-base md:text-2xl mb-8 text-center md:text-left">
+        Your Message will sent to @{{tguser.user}} anonymously
+      </p>
+
+      <form method="POST" class="bg-gray-900 opacity-75 w-full shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4">
+        {{ form.hidden_tag() }}
+        <div class="mb-4">
+          {{ form.data.label(class="block text-blue-300 py-2 font-bold mb-2") }}
+          {{form.data(class="shadow appearance-none border rounded w-full p-3 text-gray-700 leading-tight focus:ring transform transition hover:scale-105 duration-300 ease-in-out", rows="5", cols="50")}}
+        </div>
+
+         <div style="transform: scale(0.77); -webkit-transform: scale(0.77); transform-origin: 0 0; -webkit-transform-origin: 0 0;">
+          {{form.captcha}}
+        </div>
+        
+        <div class="flex items-center justify-between pt-4">
+          {{ form.submit( class="bg-gradient-to-r from-purple-800 to-green-500 hover:from-pink-500 hover:to-green-500 text-white font-bold py-2 px-4 rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out" ) }}
+          {% with messages = get_flashed_messages(with_categories=true) %} 
+          {% if messages %}
+          {% for category, message in messages %} {% if category == 'error' %}
+          <div class="text-red-400">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+          </svg>
+          </div>      
+          {% else %}
+          <div class="text-green-400">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg> 
+          </div>    
+          {% endif %} {% endfor %} {% endif %} {% endwith %}
+        </div>
+      
+
+
+      </form>
+    </div>
+
+{% endblock %}
+
+{% block photo %}
+<div class="w-full xl:w-3/5 p-12 overflow-hidden hidden xl:block">
+  <img alt="Telegram" title="Telegram" class="mx-auto w-full md:w-4/5 transform -rotate-6 transition hover:scale-105 duration-700 ease-in-out hover:rotate-6" src="{{url_for('static', filename='bigtele.png')}}" />
+</div>
+{% endblock %}

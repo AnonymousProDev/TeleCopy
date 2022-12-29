@@ -1,0 +1,28 @@
+
+{% extends "base.html" %}
+
+{% block body %}
+
+<div class="container pt-24 md:pt-20 mx-auto flex flex-wrap flex-col md:flex-row items-center">
+  <div class="flex flex-col w-full xl:w-2/5 justify-center lg:items-start overflow-y-hidden">
+    <h1 class="my-4 text-3xl md:text-5xl text-white opacity-75 font-bold leading-tight text-center md:text-left">
+      Username
+      <span class="bg-clip-text text-transparent bg-gradient-to-r from-green-400 via-pink-500 to-purple-500">
+        Not Found
+      </span>
+    </h1>
+    <p class="leading-normal text-base md:text-2xl mb-8 text-center md:text-left">
+      You can setup a new page!
+    </p>
+    <a title="Setup New Page" href='/'
+            class="bg-blue-400 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+            type="button">Setup New Page</a>
+  </div>
+  
+{% endblock %}
+
+{% block photo %}
+<div class="w-full xl:w-3/5 p-12 overflow-hidden">
+  <img alt="404" title="404" class="mx-auto w-full md:w-4/5 transform -rotate-6 transition hover:scale-105 duration-700 ease-in-out hover:rotate-6" src="{{url_for('static', filename='404.png')}}" />
+</div>
+{% endblock %}
